@@ -143,11 +143,41 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.output_line.setText(str(self.output))
 
     def div_function(self):
-        self.output = Decimal(self.num_first) / Decimal(self.num_second)
+        if self.num_first is not None and self.operation is not None and self.num_second is None:
+            print('FIRST NUM ==>', self.num_first)
+            print('SECOND NUM ==>', self.num_second)
+
+            self.output = Decimal(self.num_first) / Decimal(self.num_first)
+
+            self.num_second = self.num_first
+            self.num_first = self.output
+        else:
+            print('FIRST NUM ==>', self.num_first)
+            print('SECOND NUM ==>', self.num_second)
+
+            self.output = Decimal(self.num_first) / Decimal(self.num_second)
+
+            self.num_first = self.output
+
         self.output_line.setText(str(self.output))
 
     def mult_function(self):
-        self.output = Decimal(self.num_first) * Decimal(self.num_second)
+        if self.num_first is not None and self.operation is not None and self.num_second is None:
+            print('FIRST NUM ==>', self.num_first)
+            print('SECOND NUM ==>', self.num_second)
+
+            self.output = Decimal(self.num_first) * Decimal(self.num_first)
+
+            self.num_second = self.num_first
+            self.num_first = self.output
+        else:
+            print('FIRST NUM ==>', self.num_first)
+            print('SECOND NUM ==>', self.num_second)
+
+            self.output = Decimal(self.num_first) * Decimal(self.num_second)
+
+            self.num_first = self.output
+
         self.output_line.setText(str(self.output))
 
     def calculate_percentage(self):
