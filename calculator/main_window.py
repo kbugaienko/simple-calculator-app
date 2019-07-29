@@ -145,6 +145,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             text = text[1:]
             print(text)
 
+        if self.operation is None:
+            self.num_first = text
+        else:
+            self.num_second = text
+
         self.output_line.setText(text)
 
     def clear_screen(self):
