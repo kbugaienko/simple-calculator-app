@@ -2,5 +2,5 @@ Create a 'Calculator' application using Python 3.7, user interface designer for 
 
 This application looks like:
 
-<img src='images/img_1.png' width='100'>
+<img src='images/img_1.png' width='300'>
 
