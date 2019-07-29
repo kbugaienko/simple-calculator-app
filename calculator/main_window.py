@@ -129,9 +129,17 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     # add point '.' to current number in output line
     def clicked_point(self):
         text = self.output_line.text()
+        res = ''
 
         if '.' not in text:
-            self.output_line.setText(text + '.')
+            res = text + '.'
+
+        if self.operation is None:
+            self.num_first = res
+        else:
+            self.num_second = res
+
+        self.output_line.setText(res)
 
     # convert current number to negative or positive value
     def converted_number(self):
