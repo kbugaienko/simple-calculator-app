@@ -1,3 +1,5 @@
+import operator
+
 from PySide2.QtWidgets import QMainWindow
 
 from .main_window_ui import Ui_MainWindow
@@ -84,10 +86,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def clicked_function_btn(self):
         if self.num_second is not None:
-            self.output = eval(self.num_first + self.operation + self.num_second)
-            self.output_line.setText(str(self.output))
+            self.calculation()
+
+            self.output_line.setText(self.output)
+
             self.num_first = self.output
             self.num_second = None
+
             self.operation = self.sender().text()
             print(self.operation)
         else:
@@ -96,89 +101,32 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def calculation(self):
         if self.operation == '+':
-            self.add_function()
+            self.math_function(operator.add)
         elif self.operation == '-':
-            self.sub_function()
+            self.math_function(operator.sub)
         elif self.operation == '/':
-            self.div_function()
+            self.math_function(operator.truediv)
         elif self.operation == '*':
-            self.mult_function()
+            self.math_function(operator.mul)
 
-    def add_function(self):
+    def math_function(self, op):
+        print('FIRST NUM ==>', self.num_first)
+        print('SECOND NUM ==>', self.num_second)
+
         if self.num_first is not None and self.operation is not None and self.num_second is None:
-            print('FIRST NUM ==>',  self.num_first)
-            print('SECOND NUM ==>', self.num_second)
-
-            self.output = Decimal(self.num_first) + Decimal(self.num_first)
+            first = Decimal(self.num_first)
+            self.output = str(op(first, first))
 
             self.num_second = self.num_first
             self.num_first = self.output
         else:
-            print('FIRST NUM ==>',  self.num_first)
-            print('SECOND NUM ==>', self.num_second)
-
-            self.output = Decimal(self.num_first) + Decimal(self.num_second)
-
-            self.num_first = self.output
-
-        self.output_line.setText(str(self.output))
-
-    def sub_function(self):
-        if self.num_first is not None and self.operation is not None and self.num_second is None:
-            print('FIRST NUM ==>', self.num_first)
-            print('SECOND NUM ==>', self.num_second)
-
-            self.output = Decimal(self.num_first) - Decimal(self.num_first)
-
-            self.num_second = self.num_first
-            self.num_first = self.output
-        else:
-            print('FIRST NUM ==>', self.num_first)
-            print('SECOND NUM ==>', self.num_second)
-
-            self.output = Decimal(self.num_first) - Decimal(self.num_second)
+            first = Decimal(self.num_first)
+            second = Decimal(self.num_second)
+            self.output = str(op(first, second))
 
             self.num_first = self.output
 
-        self.output_line.setText(str(self.output))
-
-    def div_function(self):
-        if self.num_first is not None and self.operation is not None and self.num_second is None:
-            print('FIRST NUM ==>', self.num_first)
-            print('SECOND NUM ==>', self.num_second)
-
-            self.output = Decimal(self.num_first) / Decimal(self.num_first)
-
-            self.num_second = self.num_first
-            self.num_first = self.output
-        else:
-            print('FIRST NUM ==>', self.num_first)
-            print('SECOND NUM ==>', self.num_second)
-
-            self.output = Decimal(self.num_first) / Decimal(self.num_second)
-
-            self.num_first = self.output
-
-        self.output_line.setText(str(self.output))
-
-    def mult_function(self):
-        if self.num_first is not None and self.operation is not None and self.num_second is None:
-            print('FIRST NUM ==>', self.num_first)
-            print('SECOND NUM ==>', self.num_second)
-
-            self.output = Decimal(self.num_first) * Decimal(self.num_first)
-
-            self.num_second = self.num_first
-            self.num_first = self.output
-        else:
-            print('FIRST NUM ==>', self.num_first)
-            print('SECOND NUM ==>', self.num_second)
-
-            self.output = Decimal(self.num_first) * Decimal(self.num_second)
-
-            self.num_first = self.output
-
-        self.output_line.setText(str(self.output))
+        self.output_line.setText(self.output)
 
     def calculate_percentage(self):
         if self.num_first is not None and self.num_second is not None and self.operation is not None:
