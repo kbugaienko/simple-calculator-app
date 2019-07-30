@@ -138,7 +138,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
                 self.num_first = self.output
 
-            self.output_line.setText(self.output)
+            self.output_line.setText(f'{Decimal(self.output):,}')
 
         except DivisionByZero:
             self.output_line.setText('Dividing a number by zero')
@@ -148,7 +148,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 self.num_second is not None and
                 self.operation is not None):
             self.output = (Decimal(self.num_first) * Decimal(self.num_second)) / 100
-            self.output_line.setText(str(self.output))
+            self.output_line.setText(f'{Decimal(self.output):,}')
             self.num_second = self.output
 
     # add point '.' to current number in output line
