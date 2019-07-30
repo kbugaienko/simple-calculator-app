@@ -16,6 +16,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.num_second = None
         self.operation = None
         self.output = 0
+        # set flag for clicked on button '='
+        self.equal_pressed = False
 
         self.buttons = [
             self.btn_0,
@@ -62,7 +64,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # by clicked button via signal get current number
         digit = self.sender().text()
 
-        if self.operation is None:
+        if self.operation is None and self.equal_pressed is False:
             # redirect this number to output line
             if self.output_line.text() == '0':
                 self.num_first = digit
@@ -85,21 +87,29 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 print(self.num_second)
 
     def clicked_function_btn(self):
-        if self.num_second is not None:
-            self.calculation()
+        if self.equal_pressed is False:
+            if self.num_second is not None:
+                self.calculation()
 
-            self.output_line.setText(self.output)
+                self.output_line.setText(self.output)
 
-            self.num_first = self.output
-            self.num_second = None
+                self.num_first = self.output
+                self.num_second = None
 
-            self.operation = self.sender().text()
-            print(self.operation)
-        else:
-            self.operation = self.sender().text()
-            print(self.operation)
+                self.operation = self.sender().text()
+                print(self.operation)
+            else:
+                self.operation = self.sender().text()
+                print(self.operation)
+        elif self.equal_pressed is True:
+            if self.num_first is not None:
+                self.operation = self.sender().text()
+                print(self.operation)
+                self.num_second = None
 
     def calculation(self):
+        self.equal_pressed = True
+
         if self.operation == '+':
             self.math_function(operator.add)
         elif self.operation == '-':
@@ -132,7 +142,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         except DivisionByZero:
             self.output_line.setText('Dividing a number by zero')
-
 
     def calculate_percentage(self):
         if (self.num_first is not None and
@@ -178,6 +187,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def clear_screen(self):
         self.output_line.setText('0')
+        self.equal_pressed = False
         self.num_first = None
         self.num_second = None
         self.operation = None
