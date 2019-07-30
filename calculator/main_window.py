@@ -113,7 +113,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         print('FIRST NUM ==>', self.num_first)
         print('SECOND NUM ==>', self.num_second)
 
-        if self.num_first is not None and self.operation is not None and self.num_second is None:
+        if (self.num_first is not None and
+                self.operation is not None and
+                self.num_second is None):
             first = Decimal(self.num_first)
             self.output = str(op(first, first))
 
@@ -129,7 +131,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.output_line.setText(self.output)
 
     def calculate_percentage(self):
-        if self.num_first is not None and self.num_second is not None and self.operation is not None:
+        if (self.num_first is not None and
+                self.num_second is not None and
+                self.operation is not None):
             self.output = (Decimal(self.num_first) * Decimal(self.num_second)) / 100
             self.output_line.setText(str(self.output))
             self.num_second = self.output
