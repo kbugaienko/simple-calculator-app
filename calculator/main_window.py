@@ -112,23 +112,27 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def math_function(self, op):
         print('FIRST NUM ==>', self.num_first)
         print('SECOND NUM ==>', self.num_second)
+        try:
+            if (self.num_first is not None and
+                    self.operation is not None and
+                    self.num_second is None):
+                first = Decimal(self.num_first)
+                self.output = str(op(first, first))
 
-        if (self.num_first is not None and
-                self.operation is not None and
-                self.num_second is None):
-            first = Decimal(self.num_first)
-            self.output = str(op(first, first))
+                self.num_second = self.num_first
+                self.num_first = self.output
+            else:
+                first = Decimal(self.num_first)
+                second = Decimal(self.num_second)
+                self.output = str(op(first, second))
 
-            self.num_second = self.num_first
-            self.num_first = self.output
-        else:
-            first = Decimal(self.num_first)
-            second = Decimal(self.num_second)
-            self.output = str(op(first, second))
+                self.num_first = self.output
 
-            self.num_first = self.output
+            self.output_line.setText(self.output)
 
-        self.output_line.setText(self.output)
+        except DivisionByZero:
+            self.output_line.setText('Dividing a number by zero')
+
 
     def calculate_percentage(self):
         if (self.num_first is not None and
