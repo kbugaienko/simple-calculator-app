@@ -170,22 +170,22 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     # convert current number to negative or positive value
     def converted_number(self):
-        text = self.output_line.text()
-        value = float(text)
+        self.output = self.output_line.text().replace(',', '')
+        value = float(self.output)
 
         if value > 0:
-            text = '-' + text
-            print(text)
+            self.output = '-' + self.output
+            print(self.output)
         else:
-            text = text[1:]
-            print(text)
+            self.output = self.output[1:]
+            print(self.output)
 
         if self.operation is None:
-            self.num_first = text
+            self.num_first = self.output
         else:
-            self.num_second = text
+            self.num_second = self.output
 
-        self.output_line.setText(text)
+        self.output_line.setText(f'{Decimal(self.output):,.15g}')
 
     def clear_screen(self):
         self.output_line.setText('0')
