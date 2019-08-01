@@ -75,6 +75,17 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 self.num_first = self.num_first + digit
                 self.output_line.setText(f'{Decimal(self.num_first):,.15g}')
                 print(self.num_first)
+        elif (self.operation is not None and
+              self.num_second != '0' and self.equal_pressed is True):
+            if self.num_first == self.output:
+                self.num_first = '0'
+                self.num_first = digit
+                self.output_line.setText(self.num_first)
+                print(self.num_first)
+            else:
+                self.num_first = self.num_first + digit
+                self.output_line.setText(f'{Decimal(self.num_first):,.15g}')
+                print(self.num_first)
         else:
             if self.num_second == '0':
                 self.output_line.setText('')
