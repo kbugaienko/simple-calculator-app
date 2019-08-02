@@ -92,6 +92,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 self.num_second = digit
                 self.output_line.setText(f'{Decimal(self.num_second):,.15g}')
                 print(self.num_second)
+                self.equal_pressed = False
             else:
                 self.num_second = self.num_second + digit
                 self.output_line.setText(f'{Decimal(self.num_second):,.15g}')
@@ -118,8 +119,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 self.num_second = '0'
 
     def calculation(self):
-        self.equal_pressed = True
-
         if self.operation == '+':
             self.math_function(operator.add)
         elif self.operation == '-':
@@ -128,6 +127,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.math_function(operator.truediv)
         elif self.operation == '*':
             self.math_function(operator.mul)
+
+        self.equal_pressed = True
 
     def math_function(self, op):
         print('FIRST NUM ==>', self.num_first)
