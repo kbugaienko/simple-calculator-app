@@ -12,8 +12,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         super().__init__()
         self.setupUi(self)
 
-        self.num_first = '0'
-        self.num_second = '0'
+        self.num_first = ''
+        self.num_second = ''
         self.operation = None
         self.output = 0
         # set flag for clicked on button '='
@@ -76,9 +76,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 self.output_line.setText(f'{Decimal(self.num_first):,.15g}')
                 print(self.num_first)
         elif (self.operation is not None and
-              self.num_second != '0' and self.equal_pressed is True):
+              self.num_second != '' and self.equal_pressed is True):
             if self.num_first == self.output:
-                self.num_first = '0'
+                self.num_first = ''
                 self.num_first = digit
                 self.output_line.setText(self.num_first)
                 print(self.num_first)
@@ -87,7 +87,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 self.output_line.setText(f'{Decimal(self.num_first):,.15g}')
                 print(self.num_first)
         else:
-            if self.num_second == '0':
+            if self.num_second == '':
                 self.output_line.setText('')
                 self.num_second = digit
                 self.output_line.setText(f'{Decimal(self.num_second):,.15g}')
@@ -100,11 +100,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def clicked_function_btn(self):
         if self.equal_pressed is False:
-            if self.num_second != '0':
+            if self.num_second != '':
                 self.calculation()
 
                 self.num_first = self.output_line.text()
-                self.num_second = '0'
+                self.num_second = ''
 
                 self.operation = self.sender().text()
                 print(self.operation)
@@ -112,11 +112,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 self.operation = self.sender().text()
                 print(self.operation)
         elif self.equal_pressed is True:
-            if self.num_first != '0':
+            if self.num_first != '':
                 self.operation = self.sender().text()
                 print(self.operation)
 
-                self.num_second = '0'
+                self.num_second = ''
 
     def calculation(self):
         if self.operation == '+':
@@ -134,9 +134,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         print('FIRST NUM ==>', self.num_first)
         print('SECOND NUM ==>', self.num_second)
         try:
-            if (self.num_first != '0' and
+            if (self.num_first != '' and
                     self.operation is not None and
-                    self.num_second == '0'):
+                    self.num_second == ''):
                 first = Decimal(self.num_first)
                 self.output = str(op(first, first))
 
@@ -156,8 +156,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.output_line.setText('Dividing a number by zero')
 
     def calculate_percentage(self):
-        if (self.num_first != '0' and
-                self.num_second != '0' and
+        if (self.num_first != '' and
+                self.num_second != '' and
                 self.operation is not None):
             self.output = (
                 (Decimal(self.num_first) * Decimal(self.num_second)) / 100)
@@ -202,7 +202,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def clear_screen(self):
         self.output_line.setText('0')
         self.equal_pressed = False
-        self.num_first = '0'
-        self.num_second = '0'
+        self.num_first = ''
+        self.num_second = ''
         self.operation = None
         self.output = 0
