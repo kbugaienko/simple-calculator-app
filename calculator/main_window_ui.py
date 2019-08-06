@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'main_window.ui',
 # licensing of 'main_window.ui' applies.
 #
-# Created: Thu Jul 25 17:29:31 2019
+# Created: Tue Aug  6 16:37:09 2019
 #      by: pyside2-uic  running on PySide2 5.13.0
 #
 # WARNING! All changes made in this file will be lost!
@@ -13,7 +13,7 @@ from PySide2 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(486, 588)
+        MainWindow.resize(319, 410)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.gridLayout = QtWidgets.QGridLayout(self.centralwidget)
@@ -225,10 +225,12 @@ class Ui_MainWindow(object):
         self.output_line.setSizePolicy(sizePolicy)
         self.output_line.setAutoFillBackground(False)
         self.output_line.setStyleSheet("QWidget{\n"
-"    font: 35px;\n"
+"    font: 30px;\n"
 "    qproperty-alignment: \'AlignVCenter | AlignRight\';\n"
 "    border: 1px solid gray;\n"
+"    display: inline-block;\n"
 "}")
+        self.output_line.setMaxLength(32767)
         self.output_line.setEchoMode(QtWidgets.QLineEdit.Normal)
         self.output_line.setCursorPosition(1)
         self.output_line.setReadOnly(True)

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>486</width>
-    <height>588</height>
+    <width>319</width>
+    <height>410</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -311,13 +311,16 @@ QPushButton:pressed {
       </property>
       <property name="styleSheet">
        <string notr="true">QWidget{
-	font: 35px;
+	font: 30px;
 	qproperty-alignment: 'AlignVCenter | AlignRight';
 	border: 1px solid gray;
 }</string>
       </property>
       <property name="text">
        <string>0</string>
+      </property>
+      <property name="maxLength">
+       <number>32767</number>
       </property>
       <property name="echoMode">
        <enum>QLineEdit::Normal</enum>
