@@ -193,6 +193,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.output = self.output[1:]
             print(self.output)
 
+        if self.equal_pressed is True:
+            self.num_first = self.output
+
         if self.operation is None:
             self.num_first = self.output
         else:
