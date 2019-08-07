@@ -189,6 +189,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         if value > 0:
             self.output = '-' + self.output
             print(self.output)
+        elif value == 0:
+            self.output = self.output
         else:
             self.output = self.output[1:]
             print(self.output)
