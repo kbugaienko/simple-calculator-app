@@ -69,34 +69,34 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             # redirect this number to output line
             if self.output_line.text() == '0':
                 self.num_first = digit
-                self.output_line.setText(digit)
+                self.display_number_on_screen(digit)
                 print(self.num_first)
             else:
                 # add next digit to output line
                 self.num_first = self.num_first + digit
-                self.output_line.setText(f'{Decimal(self.num_first):,.10g}')
+                self.display_number_on_screen(self.num_first)
                 print(self.num_first)
         elif (self.operation is not None and
               self.num_second != '' and self.equal_pressed is True):
             if self.num_first == self.output:
                 self.num_first = ''
                 self.num_first = digit
-                self.output_line.setText(self.num_first)
+                self.display_number_on_screen(self.num_first)
                 print(self.num_first)
             else:
                 self.num_first = self.num_first + digit
-                self.output_line.setText(f'{Decimal(self.num_first):,.10g}')
+                self.display_number_on_screen(self.num_first)
                 print(self.num_first)
         else:
             if self.num_second == '':
                 self.output_line.setText('')
                 self.num_second = digit
-                self.output_line.setText(f'{Decimal(self.num_second):,.10g}')
+                self.display_number_on_screen(self.num_second)
                 print(self.num_second)
                 self.equal_pressed = False
             else:
                 self.num_second = self.num_second + digit
-                self.output_line.setText(f'{Decimal(self.num_second):,.10g}')
+                self.display_number_on_screen(self.num_second)
                 print(self.num_second)
 
     def clicked_function_btn(self):
@@ -150,7 +150,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
                 self.num_first = self.output
 
-            self.output_line.setText(f'{Decimal(self.output):,.10g}')
+            self.display_number_on_screen(self.output)
             print('RESULT ==>', self.output)
 
         except DivisionByZero:
@@ -162,7 +162,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 self.operation is not None):
             self.output = (
                 (Decimal(self.num_first) * Decimal(self.num_second)) / 100)
-            self.output_line.setText(f'{Decimal(self.output):,.10g}')
+            self.display_number_on_screen(self.output)
             self.num_second = self.output
 
     # add point '.' to current number in output line
@@ -203,7 +203,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         else:
             self.num_second = self.output
 
-        self.output_line.setText(f'{Decimal(self.output):,.10g}')
+        self.display_number_on_screen(self.output)
+
+    # processing the display of numbers on the screen
+    def display_number_on_screen(self, value):
+        self.output_line.setText(f'{Decimal(value):,.10g}')
 
     def clear_screen(self):
         self.output_line.setText('0')
