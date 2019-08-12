@@ -1,5 +1,6 @@
 import operator
 
+from PySide2.QtGui import QFontMetrics
 from PySide2.QtWidgets import QMainWindow
 
 from .main_window_ui import Ui_MainWindow
@@ -162,7 +163,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 self.operation is not None):
             self.output = (
                 (Decimal(self.num_first) * Decimal(self.num_second)) / 100)
-            self.display_number_on_screen(self.output)
+            self.display_number_on_screen(str(self.output))
             self.num_second = self.output
 
     # add point '.' to current number in output line
@@ -207,12 +208,33 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     # processing the display of numbers on the screen
     def display_number_on_screen(self, value):
-        self.output_line.setText(f'{Decimal(value):,.10g}')
+        output = f'{Decimal(value):,}'
+
+        # calculate width for input line
+        window_width = (self.output_line.width()) - 10
+        print('window width is ==>', window_width)
+
+        # get font information for current text input
+        font = self.output_line.font()
+
+        for i in range(30, 7, -1):
+            font.setPointSize(i)
+            print('FONT SIZE: ', i)
+            # calculate width for current line
+            output_width = QFontMetrics(font).width(output)
+            print('output width is ==> ', output_width)
+
+            if output_width < window_width:
+                self.output_line.setFont(font)
+                break
+
+        self.output_line.setText(output)
 
     def clear_screen(self):
-        self.output_line.setText('0')
+        self.display_number_on_screen(0)
         self.equal_pressed = False
         self.num_first = ''
         self.num_second = ''
         self.operation = None
         self.output = 0
+

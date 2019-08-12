@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'main_window.ui',
 # licensing of 'main_window.ui' applies.
 #
-# Created: Tue Aug  6 16:37:09 2019
+# Created: Mon Aug 12 15:50:08 2019
 #      by: pyside2-uic  running on PySide2 5.13.0
 #
 # WARNING! All changes made in this file will be lost!
@@ -223,17 +223,18 @@ class Ui_MainWindow(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.output_line.sizePolicy().hasHeightForWidth())
         self.output_line.setSizePolicy(sizePolicy)
+        font = QtGui.QFont()
+        font.setPointSize(30)
+        font.setItalic(False)
+        font.setStrikeOut(False)
+        self.output_line.setFont(font)
         self.output_line.setAutoFillBackground(False)
-        self.output_line.setStyleSheet("QWidget{\n"
-"    font: 30px;\n"
-"    qproperty-alignment: \'AlignVCenter | AlignRight\';\n"
-"    border: 1px solid gray;\n"
-"    display: inline-block;\n"
-"}")
         self.output_line.setMaxLength(32767)
         self.output_line.setEchoMode(QtWidgets.QLineEdit.Normal)
         self.output_line.setCursorPosition(1)
+        self.output_line.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.output_line.setReadOnly(True)
+        self.output_line.setClearButtonEnabled(False)
         self.output_line.setObjectName("output_line")
         self.gridLayout.addWidget(self.output_line, 0, 0, 1, 4)
         self.btn_7 = QtWidgets.QPushButton(self.centralwidget)
