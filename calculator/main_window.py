@@ -17,6 +17,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.num_first = ''
         self.num_second = ''
         self.operation = None
+        self.current_num = ''
         self.output = 0
         # set flag for clicked on button '='
         self.equal_pressed = False
@@ -152,7 +153,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 self.num_first = self.output
 
             self.display_number_on_screen(self.output)
-            print('RESULT ==>', self.output)
 
         except DivisionByZero:
             self.output_line.setText('Dividing a number by zero')
@@ -168,23 +168,21 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     # add point '.' to current number in output line
     def clicked_point(self):
-        text = self.output_line.text().replace(',', '')
-
-        if '.' not in text:
-            res = text + '.'
+        if '.' not in self.current_num:
+            self.output = self.current_num + '.'
         else:
-            res = text
+            self.output = self.current_num
 
         if self.operation is None:
-            self.num_first = res
+            self.num_first = self.output
         else:
-            self.num_second = res
+            self.num_second = self.output
 
-        self.display_number_on_screen(res)
+        self.display_number_on_screen(self.output)
 
     # convert current number to negative or positive value
     def converted_number(self):
-        self.output = self.output_line.text().replace(',', '')
+        self.output = self.current_num
         value = float(self.output)
 
         if value > 0:
@@ -208,21 +206,20 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     # processing the display of numbers on the screen
     def display_number_on_screen(self, value):
+        self.current_num = value
+
         output = f'{Decimal(value):,}'
 
         # calculate width for input line
         window_width = (self.output_line.width()) - 10
-        print('window width is ==>', window_width)
 
         # get font information for current text input
         font = self.output_line.font()
 
         for i in range(30, 7, -1):
             font.setPointSize(i)
-            print('FONT SIZE: ', i)
             # calculate width for current line
             output_width = QFontMetrics(font).width(output)
-            print('output width is ==> ', output_width)
 
             if output_width < window_width:
                 self.output_line.setFont(font)
@@ -235,6 +232,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.equal_pressed = False
         self.num_first = ''
         self.num_second = ''
+        self.current_num = ''
         self.operation = None
         self.output = 0
-
