@@ -1,11 +1,10 @@
+from decimal import Decimal, DivisionByZero
 import operator
 
 from PySide2.QtGui import QFontMetrics
 from PySide2.QtWidgets import QMainWindow
 
 from .main_window_ui import Ui_MainWindow
-
-from decimal import *
 
 
 class MainWindow(QMainWindow, Ui_MainWindow):
