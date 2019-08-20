@@ -154,7 +154,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.display_number_on_screen(self.output)
 
         except DivisionByZero:
-            self.output_line.setText('Dividing a number by zero')
+            self.output_line.setText('Dividing by zero')
 
     def calculate_percentage(self):
         if (self.num_first != '' and
